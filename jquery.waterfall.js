@@ -332,7 +332,7 @@ Like masonry column shift, but works. */
 
 			self.colWidth = self.el.clientWidth - self.pl - self.pr;
 
-			self.options.colMinWidth || self.options.colMinWidth = parseInt(self.$el.css('min-width')) || 240;
+			self.options.colMinWidth || (self.options.colMinWidth = parseInt(self.$el.css('min-width')) || 240);
 
 			self.lastItems.length = ~~(self.colWidth / o.colMinWidth) || 1; //needed length
 			console.log(o.colMinWidth)
