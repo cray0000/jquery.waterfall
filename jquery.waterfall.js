@@ -332,7 +332,11 @@ Like masonry column shift, but works. */
 
 			self.colWidth = self.el.clientWidth - self.pl - self.pr;
 
-			self.options.colMinWidth || (self.options.colMinWidth = parseInt(self.$el.css('min-width')) || 240);
+			// Dynamically set colMinWidth option from CSS
+			var cssMinWidth = parseInt(self.$el.css('min-width'));
+			if (cssMinWidth) {
+				self.options.colMinWidth = cssMinWidth;
+			}
 
 			self.lastItems.length = ~~(self.colWidth / o.colMinWidth) || 1; //needed length
 			console.log(o.colMinWidth)
@@ -551,6 +555,7 @@ Like masonry column shift, but works. */
 			if (opts.width && !opts.colMinWidth) {
 				opts.colMinWidth = opts.width;
 			}
+			opts.colMinWidth || (opts.colMinWidth = 240) // fall back to default value
 			var wf = new Waterfall($this, opts);
 			if (!$this.data('waterfall')) $this.data('waterfall', wf);
 			return wf;
